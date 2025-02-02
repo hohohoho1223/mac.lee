@@ -293,28 +293,34 @@ class PayCash:
             except :
                 print("잘못 입력하셨습니다.")
                 continue
-            if total_amount_input < total_amount :
+
+            #금액이 부족한 경우
+            while total_amount_input < total_amount:
                 print("금액이 부족합니다.")
-                print("필요한 금액 :" str(total_amount-total_amount_input) + "원")
+                print("필요한 금액 :" + str(total_amount - total_amount_input) + "원")
                 print("금액을 더 입력해주십시오.")
-                
-            elif total_amount_input >= total_amount :
-                print("잔돈은 " + str(total_amount_input - total_amount) + "원 입니다.")
-                print("결제가 완료되었습니다.")
-                print("현금 영수증을 출력하시겠습니까? Y/N")
-                while True :
-                    if input() == 'Y' :
-                        Receipt.receipt_cash() #현금영수증 함수 호출
-                        break
-                    elif input() == 'N' :
-                        print("결제가 완료되었습니다. 감사합니다.")
-                        return
-                    else :
-                        print("잘못 입력하셨습니다.")
-                        continue
-            else :
-                print("잘못 입력하셨습니다.")
-                continue
+                try:
+                    amount_input = int(input()) #추가 금액 입력
+                    total_amount_input += amount_input
+                except ValueError:
+                    print("잘못 입력하셨습니다.")
+                    continue
+
+            #결제가 완료된 경우
+            print("잔돈은 " + str(total_amount_input - total_amount) + "원 입니다.")
+            print("결제가 완료되었습니다.")
+            print("현금 영수증을 출력하시겠습니까? Y/N")
+            while True :
+                if input() == 'Y' :
+                    Receipt.receipt_cash() #현금영수증 함수 호출
+                    break
+                elif input() == 'N' :
+                    print("결제가 완료되었습니다. 감사합니다.")
+                    return
+                else :
+                    print("잘못 입력하셨습니다.")
+                    continue
+           
 #카드결제
 class PayCard:
     def pay_method_Card():
