@@ -248,7 +248,7 @@ class Pay:
             if pay_select == 'Y' : # 예 선택
                 print("결제를 시작합니다.")
                 print("결제 방식을 입력해주십시오.")
-                print(" cash / card ")
+                print("cash or card")
                 while True :
                     pay_method = input()
                     if pay_method == 'cash' :
@@ -283,21 +283,21 @@ class Pay:
 class PayCash:
     def pay_method_Cash():
         global total_amount # 전역 변수 호출(값이 수정되므로 global 키워드 사용)
+        while True:
             print("현금 결제를 시작합니다.")
             print("--------------------PAY(Cash)--------------------")
             print("총 결제 금액은" + str(total_amount) + "원 입니다.")
             print("투입할 금액을 입력해주십시오.")
-
             try :
                 total_amount_input = int(input()) # 현금 금액 입력
             except :
                 print("잘못 입력하셨습니다.")
-                return Pay.pay()
-
+                continue
             if total_amount_input < total_amount :
                 print("금액이 부족합니다.")
-                print("결제화면으로 돌아갑니다.")
-                Pay.pay()
+                print("필요한 금액 :" str(total_amount-total_amount_input) + "원")
+                print("금액을 더 입력해주십시오.")
+                
             elif total_amount_input >= total_amount :
                 print("잔돈은 " + str(total_amount_input - total_amount) + "원 입니다.")
                 print("결제가 완료되었습니다.")
@@ -314,35 +314,35 @@ class PayCash:
                         continue
             else :
                 print("잘못 입력하셨습니다.")
-                return Pay.pay()
+                continue
 #카드결제
 class PayCard:
     def pay_method_Card():
         global total_amount # 전역 변수 호출(값이 수정되므로 global 키워드 사용)
-        if pay_method == 'card' : # 카드결제
-            print("카드 결제를 시작합니다.")
-            print("--------------------PAY(Card)--------------------")
-            print("총 결제 금액은 " + str(total_amount) + "원 입니다.")
-            print("결제가 완료되었습니다.")
-            Receipt.receipt_card() #영수증 함수 호출
-        else :
-            print("잘못 입력하셨습니다.")
-            while True :
-                pay_select = input("다시 결제 하시겠습니까? Y/N")
-                if pay_select == 'Y':
-                    return Pay.pay()
-                elif pay_select == 'N' :
-                    print("--------------------WARNNING--------------------")
-                    print("결제를 취소하시겠습니까? 초기로 돌아갑니다. Y/N ")
-                    pay_select_cancle = input()
-                    if pay_select_cancle == 'Y' :
-                        return Order.start() #초기로 return
-                    elif pay_select_cancle == 'N' :
-                        return PayCard.pay_method_Card() #결제
-                        break
-                else :
-                    print("잘못 입력하셨습니다.")
-                    continue
+        print("카드 결제를 시작합니다.")
+        print("--------------------PAY(Card)--------------------")
+        print("총 결제 금액은 " + str(total_amount) + "원 입니다.")
+        print("카드 결제중입니다...")
+        print("결제가 완료되었습니다.")
+        Receipt.receipt_card() #영수증 함수 호출
+        # else :
+        #     print("잘못 입력하셨습니다.")
+        #     while True :
+        #         pay_select = input("다시 결제 하시겠습니까? Y/N")
+        #         if pay_select == 'Y':
+        #             return Pay.pay()
+        #         elif pay_select == 'N' :
+        #             print("--------------------WARNNING--------------------")
+        #             print("결제를 취소하시겠습니까? 초기로 돌아갑니다. Y/N ")
+        #             pay_select_cancle = input()
+        #             if pay_select_cancle == 'Y' :
+        #                 return Order.start() #초기로 return
+        #             elif pay_select_cancle == 'N' :
+        #                 return PayCard.pay_method_Card() #결제
+        #                 break
+        #         else :
+        #             print("잘못 입력하셨습니다.")
+        #             continue
 #영수증
 class Receipt:
     def receipt_card():
