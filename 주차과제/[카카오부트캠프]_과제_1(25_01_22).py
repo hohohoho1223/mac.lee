@@ -331,24 +331,7 @@ class PayCard:
         print("카드 결제중입니다...")
         print("결제가 완료되었습니다.")
         Receipt.receipt_card() #영수증 함수 호출
-        # else :
-        #     print("잘못 입력하셨습니다.")
-        #     while True :
-        #         pay_select = input("다시 결제 하시겠습니까? Y/N")
-        #         if pay_select == 'Y':
-        #             return Pay.pay()
-        #         elif pay_select == 'N' :
-        #             print("--------------------WARNNING--------------------")
-        #             print("결제를 취소하시겠습니까? 초기로 돌아갑니다. Y/N ")
-        #             pay_select_cancle = input()
-        #             if pay_select_cancle == 'Y' :
-        #                 return Order.start() #초기로 return
-        #             elif pay_select_cancle == 'N' :
-        #                 return PayCard.pay_method_Card() #결제
-        #                 break
-        #         else :
-        #             print("잘못 입력하셨습니다.")
-        #             continue
+
 #영수증
 class Receipt:
     def receipt_card():
@@ -370,7 +353,6 @@ class Receipt:
                 continue
     def receipt_cash():
         global total_amount # 전역 변수 호출
-        print("현금영수증을 출력하시겠습니까? Y/N")
         while True:
             receipt_cash_respon = input()
             if receipt_cash_respon == 'Y':
