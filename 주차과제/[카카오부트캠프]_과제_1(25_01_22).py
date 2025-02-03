@@ -63,9 +63,8 @@ class User:
             if user_name_check == 'Y' :
                 print("-----------------------------------------------")
                 print("안녕하세요" " "+ self.name + "님!")
-                print("랜덤으로 지급액이 산정되며")
-                print("해당 지급액으로 주문이 가능합니다!^^")
-
+                # print("랜덤으로 지급액이 산정되며")
+                # print("해당 지급액으로 주문이 가능합니다!^^")
                 pass # 추후 개발
                 Order.start() # 주문 시작
                 break
