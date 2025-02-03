@@ -244,40 +244,48 @@ class Pay:
         print("주문하시는 품목은" + str(menu_bucket_list) + "입니다.")
         while True :
             print("결제를 하시겠습니까? Y/N")
-            pay_select = input()
+            pay_select = input().strip.upper()
             if pay_select == 'Y' : # 예 선택
-                print("결제를 시작합니다.")
-                print("결제 방식을 입력해주십시오.")
-                print("cash or card")
-                while True :
-                    pay_method = input()
-                    if pay_method == 'cash' :
-                        PayCash.pay_method_Cash() # 현금 결제 함수 호출
-                        break
-                    elif pay_method == 'card' :
-                        PayCard.pay_method_Card() # 카드 결제 함수 호출
-                        break
-                    else :
-                        print("잘못 입력하셨습니다.")
-                        continue
-            elif pay_select == 'N' :
-                print("결제를 취소하시겠습니까?")
-                print("현재 저장된 데이터는 사라집니다 Y/N")
-                while True :
-                    pay_select_cancle = input()
-                    if pay_select_cancle == 'N' :
-                        return Pay.pay()
-                        break
-                    elif pay_select_cancle == 'Y' :
-                        print("초기 화면으로 돌아갑니다.")
-                        return Order.start()
-                        break
-                    else :
-                        print("잘못 입력하셨습니다.")
-                        continue
+                Pay.select_payment_method()
+                break
+            elif pay_select == 'N' : #아니오 선택
+                Pay.cancle_payment()
+                break
             else :
                 print("잘못 입력하셨습니다.")
                 continue
+
+    def select_payment_method(): 
+        print("결제를 시작합니다.")
+        print("결제 방식을 입력해주십시오.")
+        print("cash or card")
+        while True :
+            pay_method = input()
+            if pay_method == 'cash' :
+                PayCash.pay_method_Cash() # 현금 결제 함수 호출
+                break
+            elif pay_method == 'card' :
+                PayCard.pay_method_Card() # 카드 결제 함수 호출
+                break
+            else :
+                print("잘못 입력하셨습니다.")
+                continueㄹㄷ
+
+    def cancle_payment():
+        print("결제를 취소하시겠습니까?")
+        print("현재 저장된 데이터는 사라집니다 Y/N")
+        while True :
+            pay_select_cancle = input()
+            if pay_select_cancle == 'N' :
+                return Pay.pay()
+            elif pay_select_cancle == 'Y' :
+                print("초기 화면으로 돌아갑니다.")
+                return Order.start()
+            else :
+                print("잘못 입력하셨습니다.")
+                continue
+
+
 
 #현금결제
 class PayCash:
@@ -334,14 +342,14 @@ class PayCard:
 
 #영수증
 class Receipt:
-    def receipt_card():
+    def receipt_card():#카드결제
         global total_amount # 전역 변수 호출
         print("영수증을 출력하시겠습니까? Y/N")
         receipt_respon = input()
         while True :
             if receipt_respon == 'Y':
                 print("영수증 출력이 되었습니다.")
-                print("최종 금액은" + str(total_amount) + "원 입니다.")
+                print("결제를 종료합니다.")
                 print("감사합니다.")
                 break
             elif receipt_respon == 'N':
@@ -351,25 +359,18 @@ class Receipt:
             else :
                 print("잘못 입력하셨습니다.")
                 continue
-    def receipt_cash():
+
+    def receipt_cash():#현금결제
         global total_amount # 전역 변수 호출
-        while True:
-            receipt_cash_respon = input()
-            if receipt_cash_respon == 'Y':
-                print("영수증 번호를 입력해주세요.")
-                receipt_cash_number = int(input())
-                print(str(receipt_cash_number) + "입력 되었습니다.")
-                print("현금 영수증이 출력되었습니다.")
-                print("최종 금액은" + str(total_amount) + "원 입니다.")
-                print("감사합니다.")
-                break
-            elif receipt_cash_respon == 'N':
-                print("현금영수증을 출력하지 않습니다.")
-                print("결제가 완료되었습니다. 감사합니다.")
-                break #종료
-            else :
-                print("잘못 입력하셨습니다.")
-                continue
+        print("영수증 번호를 입력해주세요.")
+        try:
+            receipt_cash_number = int(input())
+        except ValueError:
+            print("잘못된 입력입니다. 숫자를 입력해주세요!")
+
+        print(str(receipt_cash_number) + "입력 되었습니다.")
+        print("현금 영수증이 출력되었습니다.")
+        print("감사합니다.")
 #프로그램 시작
 user = User()
 user.user_info() # 사용자 입력 메서드 실행
