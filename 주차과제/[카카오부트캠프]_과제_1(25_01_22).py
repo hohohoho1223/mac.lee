@@ -359,14 +359,14 @@ class Receipt:
 
     @staticmethod
     def receipt_cash():  # 현금 결제
-        print("영수증 번호를 입력해주세요.")
+        print("현금영수증 번호를 입력해주세요.")
         while True:
             try:
                 receipt_cash_number = int(input())
                 if receipt_cash_number > 0:
                     print(str(receipt_cash_number) + " 입력 되었습니다.")
                     print("--------------------------------------------")
-                    print("현금 영수증이 발행되었습니다.")
+                    print("현금영수증이 발행되었습니다.")
                     print("감사합니다.")
                     break
                 else:
@@ -375,9 +375,6 @@ class Receipt:
             except ValueError:
                 print("잘못된 입력입니다. 숫자를 입력해주세요!")
                 continue
-
-       
-
 
 # 프로그램 시작
 user = User()
