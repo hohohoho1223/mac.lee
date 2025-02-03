@@ -61,7 +61,7 @@ class User:
             user_name_check = input()
 
             if user_name_check == 'Y' :
-                print("----------------------------------------")
+                print("-----------------------------------------------")
                 print("안녕하세요" " "+ self.name + "님!")
                 print("랜덤으로 지급액이 산정되며")
                 print("해당 지급액으로 주문이 가능합니다!^^")
@@ -99,6 +99,7 @@ class Order:
         global total_amount # 전역 변수 호출
         print("--------------------MENU(Main)--------------------")
         Menu.menu_list_main()
+        print("--------------------------------------------------")
         while True :
             print("메인 메뉴 번호를 입력하십시오.")
             menu_list_main_select_number = int(input()) #메인 메뉴 선택
@@ -141,110 +142,108 @@ class Order:
 
     def menu_list_side_function() : #사이드 주문 여부 확인
         global total_amount # 전역 변수 호출(값이 수정되므로 global 키워드 사용)
-        print("----------------------------------------")
-        while True :
-            print("사이드 메뉴를 선택하시겠습니까? Y/N")
-            menu_list_side_select = input()
-            if menu_list_side_select == 'Y' :
-                print("사이드 메뉴판 입니다.")
-                print("--------------------MENU(Side)--------------------")
-                Menu.menu_list_side()
-                while True :
-                    print("사이드메뉴 번호를 선택하십시오.")
-                    menu_list_side_number = int(input())
-                    if menu_list_side_number == 1 :
-                        total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
-                        print("감자튀김이 선택되었습니다.")
-                        Bucket.menu_bucket_list_func("감자튀김")
-                        print("주문품목 :" + ",".join(menu_bucket_list))
-                        print("총금액 : " +str(total_amount) + "원")
-                        Order.menu_list_drink_function()
-                        break
-                    elif menu_list_side_number == 2 :
-                        total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
-                        print("해쉬 브라운이 선택되었습니다.")
-                        Bucket.menu_bucket_list_func("해쉬브라운")
-                        print("주문품목 :" + ",".join(menu_bucket_list))
-                        print("총금액 : " + str(total_amount) + "원")
-                        Order.menu_list_drink_function()
-                        break
-                    elif menu_list_side_number == 3 :
-                        total_amount += 3000 #총 결제 금액에 메뉴 가격 추가
-                        print("너겟이 선택되었습니다.")
-                        Bucket.menu_bucket_list_func("너겟")
-                        print("주문품목 :" + ",".join(menu_bucket_list))
-                        print("총금액 : " + str(total_amount) + "원")
-                        Order.menu_list_drink_function()
-                        break
-                    else :
-                        print("잘못 입력하셨습니다.")
-                        continue
-            elif menu_list_side_select == 'N' :
-                print("사이드 메뉴를 선택하지 않으셨습니다.")
-                Order.menu_list_drink_function() #음료 함수로 호출
-                break
-            else :
-                print("잘못 입력하셨습니다.")
-                continue
+        print("사이드 메뉴를 선택하시겠습니까? Y/N")
+        menu_list_side_select = input()
+        if menu_list_side_select == 'Y' :
+            print("사이드 메뉴판 입니다.")
+            print("--------------------MENU(Side)--------------------")
+            Menu.menu_list_side()
+            print("--------------------------------------------------")
+            while True :
+                print("사이드메뉴 번호를 선택하십시오.")
+                menu_list_side_number = int(input())
+                if menu_list_side_number == 1 :
+                    total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
+                    print("감자튀김이 선택되었습니다.")
+                    Bucket.menu_bucket_list_func("감자튀김")
+                    print("주문품목 :" + ",".join(menu_bucket_list))
+                    print("총금액 : " +str(total_amount) + "원")
+                    Order.menu_list_drink_function()
+                    break
+                elif menu_list_side_number == 2 :
+                    total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
+                    print("해쉬 브라운이 선택되었습니다.")
+                    Bucket.menu_bucket_list_func("해쉬브라운")
+                    print("주문품목 :" + ",".join(menu_bucket_list))
+                    print("총금액 : " + str(total_amount) + "원")
+                    Order.menu_list_drink_function()
+                    break
+                elif menu_list_side_number == 3 :
+                    total_amount += 3000 #총 결제 금액에 메뉴 가격 추가
+                    print("너겟이 선택되었습니다.")
+                    Bucket.menu_bucket_list_func("너겟")
+                    print("주문품목 :" + ",".join(menu_bucket_list))
+                    print("총금액 : " + str(total_amount) + "원")
+                    Order.menu_list_drink_function()
+                    break
+                else :
+                    print("잘못 입력하셨습니다.")
+                    continue
+        elif menu_list_side_select == 'N' :
+            print("사이드 메뉴를 선택하지 않으셨습니다.")
+            Order.menu_list_drink_function() #음료 함수 호출
+        else :
+            print("잘못 입력하셨습니다.")
+            Order.menu_list_side_function()#돌아가기
 
-    def menu_list_drink_function(): #음료 주문 여부 확인
+    def menu_list_drink_function(): #음료 주문
         global total_amount # 전역 변수 호출(값이 수정되므로 global 키워드 사용)
-        print("----------------------------------------")
-        while True :
-            print("음료를 선택하시겠습니까? Y/N")
-            menu_list_drink_select = input()
-            if menu_list_drink_select == 'Y' : # 예 선택
-                print("음료 메뉴판 입니다.")
-                print("--------------------MENU(Drink)--------------------")
-                Menu.menu_list_drink()
-                while True :
-                    print("음료를 선택하십시오.")
-                    menu_list_drink_number = int(input())
-                    if menu_list_drink_number == 1 :
-                        total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
-                        print("콜라가 선택되었습니다.")
-                        Bucket.menu_bucket_list_func('콜라')
-                        print("주문품목 :" +",".join(menu_bucket_list))
-                        print("총금액 : " +str(total_amount) + "원")
-                        Pay.pay() #결제 함수 호출
-                        break
-                    elif menu_list_drink_number == 2 :
-                        total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
-                        print("사이다가 선택되었습니다.")
-                        Bucket.menu_bucket_list_func('사이다')
-                        print("주문품목 :" +",".join(menu_bucket_list))
-                        print("총금액 : " +str(total_amount) + "원")
-                        Pay.pay() #결제 함수 호출
-                        break
-                    elif menu_list_drink_number == 3 :
-                        total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
-                        print("환타가 선택되었습니다.")
-                        Bucket.menu_bucket_list_func('환타')
-                        print("주문품목 :" +",".join(menu_bucket_list))
-                        print("총금액 : " +str(total_amount) + "원")
-                        Pay.pay() #결제 함수 호출
-                        break
-                    else :
-                        print("잘못 입력하셨습니다.")
-                        continue
-            elif menu_list_drink_select == 'N' : # 아니오 선택
-                print("음료를 선택하지 않으셨습니다.")
-                Pay.pay() #결제 함수 호출
-                break
-            else :
-                print("잘못 입력하셨습니다.")
-                continue
+        print("음료를 선택하시겠습니까? Y/N")
+        menu_list_drink_select = input()
+        if menu_list_drink_select == 'Y' : # 예 선택
+            print("음료 메뉴판 입니다.")
+            print("--------------------MENU(Drink)--------------------")
+            Menu.menu_list_drink()
+            print("---------------------------------------------------")
+            while True :
+                print("음료를 선택하십시오.")
+                menu_list_drink_number = int(input())
+                if menu_list_drink_number == 1 :
+                    total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
+                    print("콜라가 선택되었습니다.")
+                    Bucket.menu_bucket_list_func('콜라')
+                    print("주문품목 :" +",".join(menu_bucket_list))
+                    print("총금액 : " +str(total_amount) + "원")
+                    Pay.pay() #결제 함수 호출
+                    break
+                elif menu_list_drink_number == 2 :
+                    total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
+                    print("사이다가 선택되었습니다.")
+                    Bucket.menu_bucket_list_func('사이다')
+                    print("주문품목 :" +",".join(menu_bucket_list))
+                    print("총금액 : " +str(total_amount) + "원")
+                    Pay.pay() #결제 함수 호출
+                    break
+                elif menu_list_drink_number == 3 :
+                    total_amount += 2500 #총 결제 금액에 메뉴 가격 추가
+                    print("환타가 선택되었습니다.")
+                    Bucket.menu_bucket_list_func('환타')
+                    print("주문품목 :" +",".join(menu_bucket_list))
+                    print("총금액 : " +str(total_amount) + "원")
+                    Pay.pay() #결제 함수 호출
+                    break
+                else :
+                    print("잘못 입력하셨습니다.")
+                    continue
+        elif menu_list_drink_select == 'N' : # 아니오 선택
+            print("음료를 선택하지 않으셨습니다.")
+            Pay.pay() #결제 함수 호출
+        else :
+            print("잘못 입력하셨습니다.")
+            Order.menu_list_drink_function()#다시호출
+            
 #결제
 class Pay:
     def pay(): #결제 모듈
         global total_amount # 전역 변수 호출(값이 수정되므로 global 키워드 사용)
         global menu_bucket_list # 전역 변수 호출(값이 수정되므로 global 키워드 사용)
-        print("--------------------PAY--------------------")
-        print("총 주문 금액은" + str(total_amount)+ "원 이며")
-        print("주문하시는 품목은" + str(menu_bucket_list) + "입니다.")
+        print("--------------------BILL--------------------")
+        print("총 주문 금액:" + str(total_amount))
+        print("주문 품목:" + str(menu_bucket_list))
+        print("--------------------------------------------")
         while True :
             print("결제를 하시겠습니까? Y/N")
-            pay_select = input().strip.upper()
+            pay_select = input()
             if pay_select == 'Y' : # 예 선택
                 Pay.select_payment_method()
                 break
@@ -255,7 +254,7 @@ class Pay:
                 print("잘못 입력하셨습니다.")
                 continue
 
-    def select_payment_method(): 
+    def select_payment_method(): #예 선택
         print("결제를 시작합니다.")
         print("결제 방식을 입력해주십시오.")
         print("cash or card")
@@ -269,7 +268,7 @@ class Pay:
                 break
             else :
                 print("잘못 입력하셨습니다.")
-                continueㄹㄷ
+                continue
 
     def cancle_payment():
         print("결제를 취소하시겠습니까?")
@@ -285,49 +284,51 @@ class Pay:
                 print("잘못 입력하셨습니다.")
                 continue
 
-
-
 #현금결제
 class PayCash:
     def pay_method_Cash():
         global total_amount # 전역 변수 호출(값이 수정되므로 global 키워드 사용)
+        print("현금 결제를 시작합니다.")
+        print("--------------------PAY(Cash)--------------------")
+        print("총 결제 금액은" + str(total_amount) + "원 입니다.")
         while True:
-            print("현금 결제를 시작합니다.")
-            print("--------------------PAY(Cash)--------------------")
-            print("총 결제 금액은" + str(total_amount) + "원 입니다.")
             print("투입할 금액을 입력해주십시오.")
             try :
                 total_amount_input = int(input()) # 현금 금액 입력
+                break
             except :
                 print("잘못 입력하셨습니다.")
                 continue
 
-            #금액이 부족한 경우
-            while total_amount_input < total_amount:
-                print("금액이 부족합니다.")
-                print("필요한 금액 :" + str(total_amount - total_amount_input) + "원")
-                print("금액을 더 입력해주십시오.")
-                try:
-                    amount_input = int(input()) #추가 금액 입력
-                    total_amount_input += amount_input
-                except ValueError:
-                    print("잘못 입력하셨습니다.")
-                    continue
+        #금액이 부족한 경우
+        while total_amount_input < total_amount:
+            print("######################")
+            print("금액이 부족합니다.")
+            print("필요한 금액 :" + str(total_amount - total_amount_input) + "원")
+            print("금액을 더 입력해주십시오.")
+            print("######################")
+            try:
+                amount_input = int(input()) #추가 금액 입력
+                total_amount_input += amount_input
+            except ValueError:
+                print("잘못 입력하셨습니다.")
+                continue
 
-            #결제가 완료된 경우
-            print("잔돈은 " + str(total_amount_input - total_amount) + "원 입니다.")
-            print("결제가 완료되었습니다.")
-            print("현금 영수증을 출력하시겠습니까? Y/N")
-            while True :
-                if input() == 'Y' :
-                    Receipt.receipt_cash() #현금영수증 함수 호출
-                    break
-                elif input() == 'N' :
-                    print("결제가 완료되었습니다. 감사합니다.")
-                    return
-                else :
-                    print("잘못 입력하셨습니다.")
-                    continue
+        #결제가 완료된 경우
+        print("잔돈은 " + str(total_amount_input - total_amount) + "원 입니다.")
+        print("결제가 완료되었습니다.")
+        print("--------------------------------------------")
+        print("현금 영수증을 출력하시겠습니까? Y/N")
+        while True :
+            if input() == 'Y' :
+                Receipt.receipt_cash() #현금영수증 함수 호출
+                break
+            elif input() == 'N' :
+                print("결제가 완료되었습니다. 감사합니다.")
+                return #종료
+            else :
+                print("잘못 입력하셨습니다.")
+                continue
            
 #카드결제
 class PayCard:
@@ -342,6 +343,7 @@ class PayCard:
 
 #영수증
 class Receipt:
+
     def receipt_card():#카드결제
         global total_amount # 전역 변수 호출
         print("영수증을 출력하시겠습니까? Y/N")
@@ -369,8 +371,11 @@ class Receipt:
             print("잘못된 입력입니다. 숫자를 입력해주세요!")
 
         print(str(receipt_cash_number) + "입력 되었습니다.")
-        print("현금 영수증이 출력되었습니다.")
+        print("--------------------------------------------")
+        print("현금 영수증이 발행되었습니다.")
         print("감사합니다.")
+        
+
 #프로그램 시작
 user = User()
 user.user_info() # 사용자 입력 메서드 실행
