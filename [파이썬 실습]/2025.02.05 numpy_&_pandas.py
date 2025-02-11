@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1s9YAcdh7DsAm3Padz6n9gSalUP08SEKt
 """
 
-```Python
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -538,4 +538,3 @@ print(y)
 y = [x[0],x[2]]
 print(y)
 
-```
