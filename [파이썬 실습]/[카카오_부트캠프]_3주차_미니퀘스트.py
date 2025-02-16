@@ -56,10 +56,11 @@ data = {
 }
 
 df = pd.DataFrame(data)
+
 df_before_2019 = df[df['가입일']< '2019-01-01']
-df_before_2019['연봉'] = df_before_2019['연봉'] * 1.1
-df_new = df.merge(df_before_2019, how='')
-df_new
+df_before_2019['연봉'] = df_before_2019["연봉"] * 1.1
+# df_before_2019 += 1.1 랑 같은표현이다.
+df_before_2019['연봉'].mean()
 
 """#비정형데이터_미니퀘스트
 
