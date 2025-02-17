@@ -95,11 +95,11 @@ new_df = new_df.rename(columns = {
     "name" : "Name",
     "username" : "Username",
     "email": "Email",
-    "address" : "Address",
+    "address" : "City",
     "company" : "Company"
     })
 
-new_df["City"] = new_df["Address"].apply( lambda x: x["city"])
+new_df["City"] = new_df["City"].apply( lambda x: x["city"])
 new_df["Company"] = new_df["Company"].apply(lambda x: x["name"])
 
 new_df_filtered = new_df[new_df["City"].isin(["Lebsackbury","Roscoeview"])]
