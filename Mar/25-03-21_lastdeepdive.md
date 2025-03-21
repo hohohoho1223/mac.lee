@@ -9,12 +9,6 @@
 ## ERD(Entity-Relationship Diagram)이란?
 
 - 개체 관계도로서, 프로덕트의 데이터 모델임
-- 이미지 예시
-
-![출처 : https://www.google.com/url?sa=i&url=https%3A%2F%2Fgitmind.com%2Fkr%2Ferd-examples.html&psig=AOvVaw1xZckokuwsG_ok6nnshN1x&ust=1742618795060000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNid14SvmowDFQAAAAAdAAAAABAE](attachment:ed00802d-9850-43be-b1b7-93b359562277:image.png)
-
-- 출처 : https://www.google.com/url?sa=i&url=https%3A%2F%2Fgitmind.com%2Fkr%2Ferd-examples.html&psig=AOvVaw1xZckokuwsG_ok6nnshN1x&ust=1742618795060000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNid14SvmowDFQAAAAAdAAAAABAE
-
 - 데이터베이스 설계는 유지보수 및 성능을 위해 효율적인 설계가 필수 불가결이다!
 
 ## ERD가 데이터베이스 설계의 효율성이 높은 이유
